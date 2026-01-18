@@ -1,50 +1,137 @@
-# Welcome to your Expo app 👋
+# Plinko (Pachinko) Game — React Native (Android)
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A clean, mobile-first **Plinko (Pachinko) game** built using **React Native with Expo**, designed as part of an engineering internship coding assignment.
+The focus is on **correct gameplay logic, clean UI, and maintainable architecture**, rather than heavy physics engines.
 
-## Get started
+---
 
-1. Install dependencies
+## Features
 
-   ```bash
-   npm install
-   ```
+### Core Gameplay
 
-2. Start the app
+* Vertical Plinko board with **multiple centered pegs**
+* **Drop Ball** action with realistic left/right bouncing
+* **5 scoring buckets** (10, 20, 50, 20, 10)
+* Score automatically updates when the ball lands
+* Clean, minimal, **Material-style UI**
 
-   ```bash
-   npx expo start
-   ```
+### Bonus Features
 
-In the output, you'll find options to open the app in a
+* **Restart Game** (resets score and balls)
+* **High Score Saving** using AsyncStorage
+* **Limited Balls System** (default: 5 balls)
+* **Power-Up Row** (special peg row that doubles score)
+* Smooth animations using React Native `Animated`
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+---
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## Technical Approach
 
-## Get a fresh project
+* **No physics engine** used
+  Instead, the ball snaps to actual peg coordinates per row, ensuring:
 
-When you're ready, run:
+  * Visual alignment with pegs
+  * Predictable, fair gameplay
+  * Simpler and more readable logic
 
-```bash
-npm run reset-project
+* **Separation of Concerns**
+
+  * Game logic handled via a custom hook
+  * UI split into reusable components
+  * Constants and styles centralized
+
+This keeps the code **scalable, testable, and interview-friendly**.
+
+---
+
+## Project Structure
+
+```text
+pachinko-game/
+├── app/
+│   ├── _layout.tsx
+│   └── index.tsx          # Main screen
+│
+├── components/
+│   ├── Board.tsx          # Board + pegs
+│   ├── Ball.tsx           # Animated ball
+│   ├── Buckets.tsx        # Scoring buckets
+│   └── Controls.tsx       # Drop / Restart buttons
+│
+├── hooks/
+│   └── usePlinkoGame.ts   # Core game logic
+│
+├── constants/
+│   └── game.ts            # Config & constants
+│
+├── styles/
+│   └── theme.ts           # Material-style UI
+│
+└── README.md
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+---
 
-## Learn more
+## How to Run the App
 
-To learn more about developing your project with Expo, look at the following resources:
+### Prerequisites
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+* Node.js (LTS recommended)
+* Android phone with **Expo Go** installed
 
-## Join the community
+### Steps
 
-Join our community of developers creating universal apps.
+```bash
+npm install
+npx expo start
+```
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+* Scan the QR code using **Expo Go** on your Android device
+* (If network issues occur, use `npx expo start --tunnel`)
+
+---
+
+## Testing
+
+* Tested on a **real Android device**
+* Verified:
+
+  * Multiple drops produce different paths
+  * Peg collisions visually align
+  * Score and high score update correctly
+  * Edge cases like rapid taps and zero balls remaining
+
+---
+
+## Demo
+
+A short screen recording (30–45 seconds) demonstrates:
+
+* App launch
+* Ball drops
+* Score updates
+* Bonus features in action
+
+---
+
+## Possible Improvements
+
+* Multiple balls on screen simultaneously
+* Sound effects / haptic feedback
+* Adjustable difficulty levels
+* Leaderboard or analytics
+
+---
+
+## Summary
+
+This project demonstrates:
+
+* Strong fundamentals in React Native
+* Clean UI/UX decisions
+* Thoughtful architecture
+* Ability to build, iterate, and polish a working product
+
+**Built for clarity, correctness, and mobile usability.**
+
+---
